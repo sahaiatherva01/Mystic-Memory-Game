@@ -42,4 +42,3 @@ Built using **HTML, CSS, and JavaScript**, this project showcases clean UI desig
 * Multiple difficulty levels
 * Unlockable themes
 * Animated backgrounds
-* Symbol packs (arcane, sci-fi, nature, etc.)
