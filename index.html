@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mystic Memory Game</title>
 
-<!-- Combined CSS -->
 <style>
 :root {
     --primary: #1abc9c;
@@ -81,9 +80,6 @@ h1 {
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .btn:hover {
@@ -92,20 +88,18 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.btn:active {
-    transform: translateY(0);
-}
-
-/* UPDATED RESPONSIVE GRID */
+/* 🔥 STRICT 4×4 GRID — works on all devices */
 .game-board {
     display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(4, 1fr);
     gap: 15px;
     perspective: 1000px;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
-/* Fluid card sizing */
+/* Fluid cards for all screen sizes */
 .card {
+    width: 100%;
     aspect-ratio: 1 / 1.3;
     background-color: var(--surface);
     border-radius: 10px;
@@ -182,14 +176,8 @@ h1 {
 }
 
 @keyframes modalAppear {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .modal-content h2 {
@@ -229,7 +217,6 @@ h1 {
 </div>
 </div>
 
-<!-- Combined JS -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const gameBoard = document.getElementById('gameBoard');
@@ -274,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const emojis = ['🦇', '🌑', '🕷️', '🧛‍♂️', '🧙‍♂️', '⚔️', '🧟‍♂️', '🦄'];
         const pairs = [...emojis, ...emojis];
 
-        return pairs.map((emoji, index) => {
+        return pairs.map(emoji => {
             const card = document.createElement('div');
             card.classList.add('card');
             card.dataset.emoji = emoji;
@@ -291,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
             card.appendChild(back);
 
             card.addEventListener('click', flipCard);
-
             return card;
         });
     }
@@ -327,9 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             disableCards();
             matchedPairs++;
 
-            if (matchedPairs === totalPairs) {
-                endGame();
-            }
+            if (matchedPairs === totalPairs) endGame();
         } else {
             unflipCards();
         }
@@ -348,7 +332,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function unflipCards() {
         lockBoard = true;
-
         setTimeout(() => {
             firstCard.classList.remove('flipped');
             secondCard.classList.remove('flipped');
@@ -368,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const remainingSeconds = seconds % 60;
 
             timerDisplay.textContent =
-            `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+                `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
         }, 1000);
     }
 
@@ -376,12 +359,10 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(timer);
         finalMoves.textContent = moves;
         finalTime.textContent = timerDisplay.textContent;
-
         winModal.style.display = 'flex';
     }
 
     restartBtn.addEventListener('click', initGame);
-
     playAgainBtn.addEventListener('click', () => {
         winModal.style.display = 'none';
         initGame();
