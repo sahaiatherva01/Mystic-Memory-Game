@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mystic Memory Game</title>
-    
+
     <!-- Combined CSS -->
     <style>
         :root {
@@ -202,16 +202,15 @@
 
         @media (max-width: 600px) {
             .game-board {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
-
             .card {
-                height: 90px;
+                height: 85px; /* Adjusted for mobile so it fits nicely */
+            }
+            h1 {
+                font-size: 1.8rem;
             }
 
-            h1 {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
